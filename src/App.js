@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 function App() {
+  const handleButtonClick = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/make-video', {
+        method: 'POST',
+      });
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while making the video.');
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button className="big-button" onClick={handleButtonClick}>Make a Video</button>
     </div>
   );
 }
